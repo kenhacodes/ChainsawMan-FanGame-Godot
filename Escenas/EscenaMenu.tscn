@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Escenas/EscenaMenu.gd" type="Script" id=1]
+
+[node name="Escena Menu" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 965, 537 )
+
+[node name="ButtonPlay" type="Button" parent="."]
+margin_left = 764.0
+margin_top = 395.0
+margin_right = 965.0
+margin_bottom = 447.0
+rect_scale = Vector2( 2, 2 )
+text = "P L A Y"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonCreditos" type="Button" parent="."]
+margin_left = 764.0
+margin_top = 584.0
+margin_right = 966.0
+margin_bottom = 636.0
+rect_scale = Vector2( 2, 2 )
+text = "Creditos"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="ButtonPlay" to="." method="_on_ButtonPlay_pressed"]
+[connection signal="pressed" from="ButtonCreditos" to="." method="_on_ButtonCreditos_pressed"]

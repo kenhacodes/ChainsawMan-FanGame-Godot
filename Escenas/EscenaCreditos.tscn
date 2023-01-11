@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Escenas/EscenaCreditos.gd" type="Script" id=1]
+
+[node name="Escena Creditos" type="Node2D"]
+position = Vector2( -5, -5 )
+script = ExtResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 963, 542 )
+
+[node name="ButtonVolverMenu" type="Button" parent="."]
+margin_left = 746.0
+margin_top = 889.0
+margin_right = 970.0
+margin_bottom = 957.0
+rect_scale = Vector2( 2, 2 )
+text = "G O   B A C K"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_right = 0.532
+margin_left = 313.0
+margin_top = 13.0
+margin_right = 949.0
+margin_bottom = 495.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 2, 2 )
+text = "CREDITOS
+
+
+Director: Guillermo Boscá
+
+Productor: Guillermo Boscá
+
+Direccion Artistica: Guillermo Boscá
+
+Programador: Guillermo Boscá
+
+Dibujo: Guillermo Boscá
+
+Animaciones: Guillermo Boscá
+
+Inspirado en el Manga de Chainsaw Man dibujado por Tatsuki Fujimoto
+
+Un agradecimiento especial a Antoni Belloch por distraerme con partidas del lol durante el desarrollo del juego"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="ButtonVolverMenu" to="." method="_on_ButtonVolverMenu_pressed"]

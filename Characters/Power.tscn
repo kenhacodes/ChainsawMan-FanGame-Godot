@@ -1,0 +1,86 @@
+[gd_scene load_steps=30 format=2]
+
+[ext_resource path="res://Assets/Characters/Power/IDLE/power_idle_0004.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Characters/Power/IDLE/power_idle_0003.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Characters/Power/IDLE/power_idle_0005.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Characters/Power/IDLE/power_idle_0006.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Characters/Power/IDLE/power_idle_0007.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Characters/Power/IDLE/power_idle_0001.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Characters/Power/IDLE/power_idle_0008.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Characters/Power/IDLE/power_idle_0009.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Characters/Power/IDLE/power_idle_0010.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Characters/Power/IDLE/power_idle_0011.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Characters/Power/IDLE/power_idle_0002.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Characters/Power/IDLE/power_idle_0000.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Characters/Power/ATTACK/power_attack_0010.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Characters/Power/ATTACK/power_attack_0004.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Characters/Power/ATTACK/power_attack_0008.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Characters/Power/ATTACK/power_attack_0003.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Characters/Power/ATTACK/power_attack_0006.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Characters/Power/ATTACK/power_attack_0005.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Characters/Power/ATTACK/power_attack_0007.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Characters/Power/ATTACK/power_attack_0009.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Characters/Power/IDLE/power_idle_0012.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Characters/Power/ATTACK/power_attack_0001.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Characters/Power/ATTACK/power_attack_0000.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Characters/Power/ATTACK/power_attack_0002.png" type="Texture" id=24]
+[ext_resource path="res://Characters/Power.gd" type="Script" id=25]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 123.571, 340.714 )
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 12 ), ExtResource( 6 ), ExtResource( 11 ), ExtResource( 2 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 21 ) ],
+"loop": true,
+"name": "idle",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 23 ), ExtResource( 22 ), ExtResource( 24 ), ExtResource( 16 ), ExtResource( 14 ), ExtResource( 18 ), ExtResource( 17 ), ExtResource( 19 ), ExtResource( 15 ), ExtResource( 20 ), ExtResource( 13 ) ],
+"loop": false,
+"name": "attack",
+"speed": 24.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 265.714, 338.572 )
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 40.0
+height = 606.0
+
+[node name="Power" type="KinematicBody2D" groups=["player"]]
+scale = Vector2( 0.7, 0.7 )
+script = ExtResource( 25 )
+
+[node name="Area_vida" type="Area2D" parent="." groups=["player", "playerVida"]]
+scale = Vector2( 1, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area_vida"]
+position = Vector2( -62.1428, 66.4286 )
+scale = Vector2( 1, 1 )
+shape = SubResource( 4 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "idle"
+frame = 2
+playing = true
+
+[node name="Area_attack" type="Area2D" parent="AnimatedSprite" groups=["playerAttack"]]
+position = Vector2( 151.429, 4 )
+scale = Vector2( 1, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite/Area_attack"]
+position = Vector2( 97.1429, 61.7143 )
+scale = Vector2( 0.999999, 0.999999 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
+position = Vector2( -54, 110 )
+scale = Vector2( 1, 1 )
+shape = SubResource( 2 )
+
+[connection signal="body_entered" from="Area_vida" to="." method="_on_Area_vida_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="area_entered" from="AnimatedSprite/Area_attack" to="." method="_on_Area_attack_area_entered"]
